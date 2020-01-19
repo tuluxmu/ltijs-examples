@@ -1,0 +1,12 @@
+version: '3.5'
+services: 
+  lti:
+    build: '.'
+    environment:
+      - DB_HOST=localhost
+      - DB_DATABASE=ltimoodle
+      - LTI_KEY=LTIKEY
+      - MOODLE_URL=http://localhost/moodle
+    ports:
+      - '3000:3000'
+  
