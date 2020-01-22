@@ -9,7 +9,7 @@ require('dotenv').config()
 const lti = new Lti(process.env.LTI_KEY,
   // Setting up database configurations
   { url: 'mongodb://' + process.env.DB_HOST + '/' + process.env.DB_DATABASE,
-    connection: { user: process.env.DB_USER, pass: process.env.DB_PASS } })
+    connection: { user: process.env.DB_USER, pass: process.env.DB_PASS } }, { staticPath: path.join(__dirname, 'public') })
 
 // Main route
 lti.app.get('/main', async (req, res) => {
@@ -20,7 +20,7 @@ lti.app.get('/main', async (req, res) => {
 lti.app.post('/grade', async (req, res) => {
   try {
     const grade = {
-      scoreGiven: 70,
+      scoreGiven: req.body.grade,
       activityProgress: 'Completed',
       gradingProgress: 'FullyGraded'
     }
