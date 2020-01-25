@@ -26,8 +26,7 @@ lti.app.post('/grade', async (req, res) => {
     }
 
     // Sends a grade to a platform's grade line
-    lti.Grade.ScorePublish(res.locals.token, grade)
-    return res.send('Grade Succesfully Created')
+    if (await lti.Grade.ScorePublish(res.locals.token, grade)) return res.send('Grade Succesfully Created')
   } catch (err) {
     return res.status(500).send(err.message)
   }
